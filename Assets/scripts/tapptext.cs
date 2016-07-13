@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class tapptext : MonoBehaviour {
 	public Text mytext;
+
 	int numbertap;
 
 

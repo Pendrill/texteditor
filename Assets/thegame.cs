@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class textAdventure : MonoBehaviour {
+public class thegame : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
