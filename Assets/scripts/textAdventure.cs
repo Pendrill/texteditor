@@ -102,6 +102,7 @@ public class textAdventure : MonoBehaviour {
 				
 				if (Input.anyKeyDown&&counter>10) {
 					dialogueint++;
+					counter = 0;
 				}
 					thetext.text = "Craig calls everyone buddy. He says it in they tone one might use to say '$%#@head'";
 
@@ -116,7 +117,7 @@ public class textAdventure : MonoBehaviour {
 					talkbox.text = "You, and then the two suspects. Today's the day we put an end to this";
 				}
 				if (dialogueint == 3) {
-					talkbox.text = "You don't like where this is going ";
+					thetext.text = "You don't like where this is going ";
 					talkbox.text = "I locked the doors, no one is getting out till we get to the bottom of this";
 				}
 				if (dialogueint == 4) {
@@ -153,11 +154,11 @@ public class textAdventure : MonoBehaviour {
 					
 					thetext.text = "He most certainly does not pay you the big bucks";
 					talkbox.text="This is why I pay you the big bucks! ";
+					if (Input.anyKeyDown) {
+						kitchenstage = 5;
+					}
 				}
-				if (dialogueint == 11) {
-					kitchenstage = 5;
-					counter = 0;
-				}
+
 
 					
 			}
@@ -183,17 +184,20 @@ public class textAdventure : MonoBehaviour {
 			}
 
 			if (kitchenstage == 5 && counter > 10) {
-				counter = 0;
 				thetext.text = "Craig stands there, wearing an expression you assume he thinks is an encouraging smile";
 				talkbox.text="EXIT TO HALLWAY [Z]\nTRY THE DOOR [X]";
 				if(Input.GetKeyDown(KeyCode.Z)&&counter>10){
 					currentroom = "????";	
 					counter = 0;
 				}
+				if (Input.GetKeyDown(KeyCode.X)) {
+					kitchenstage = 6;
+					counter = 0;
+				}
 
 			
 			}
-			if (kitchenstage==6&&haskey==false) {
+			if (kitchenstage==6&&haskey==false&&counter>10) {
 				thetext.text = "Craig locked it, remember?";
 				talkbox.text="EXIT TO HALLWAY [Z]" +
 				"\nTRY DOOR [X]";
@@ -204,8 +208,16 @@ public class textAdventure : MonoBehaviour {
 			}
 		}
 		if (currentroom == "????" || currentroom == "Picture Room") {
-			thetext.text="This isn't actually a hallway, it's another room. On one wall is a very large and very bewildering painting." +
-				"\n 
+			thetext.text = "This isn't actually a hallway, it's another room. On one wall hangs a very large and very bewildering painting." +
+			"\n on another side there is a door" +
+			"\n Sitting in a comfy chair in the room is your work friend, Anna. " +
+			"\nYou like Anna. Anna's cool. " +
+			"At the moment, she is sipping some (you assume) coffee, and warily taking in the painting." +
+			"\n it really is quite an image.";
+			talkbox.text="Talk to Anna [z]" +
+				"\nGo back into Break Room [x]" +
+				"\nTry the other door [c]" +
+				"\nLook at the painting [v]";
 		}
 		if (currentroom == "?????" || currentroom == "Cat Room") {
 		}
