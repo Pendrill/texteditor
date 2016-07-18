@@ -21,12 +21,14 @@ public class textAdventure : MonoBehaviour {
 	int dialogueint=0;
 	int counter=0;
 	bool haskey;
+	int talkint;
 
 	void Start () {
 		
 		textbuffer = "You are currently in the: " + currentroom+"\n";
 		cont = "Press space to continue";
 		kitchenstage = 0;
+		picroomstage = 0;
 	
 	}
 	
@@ -208,16 +210,57 @@ public class textAdventure : MonoBehaviour {
 			}
 		}
 		if (currentroom == "????" || currentroom == "Picture Room") {
-			thetext.text = "This isn't actually a hallway, it's another room. On one wall hangs a very large and very bewildering painting." +
-			"\n on another side there is a door" +
-			"\n Sitting in a comfy chair in the room is your work friend, Anna. " +
-			"\nYou like Anna. Anna's cool. " +
-			"At the moment, she is sipping some (you assume) coffee, and warily taking in the painting." +
-			"\n it really is quite an image.";
-			talkbox.text="Talk to Anna [z]" +
-				"\nGo back into Break Room [x]" +
-				"\nTry the other door [c]" +
+			if (picroomstage == 0) {
+				thetext.text = "This isn't actually a hallway, it's another room. On one wall hangs a very large and very bewildering painting." +
+				"\n Sitting in a comfy chair in the room is your work friend, Anna. " +
+				"\nYou like Anna. Anna's cool. " +
+				"At the moment, she is sipping some (you assume) coffee, and warily taking in the painting." +
+				"\n it really is quite an image.";
+				talkbox.text = "Talk to Anna [z]" +
+				"\nGo back into Break Room [x]"  +
 				"\nLook at the painting [v]";
+				if (Input.GetKeyDown (KeyCode.Z)&& counter>10) {
+					picroomstage = 1;	
+					counter = 0;
+				}
+				if (Input.GetKeyDown (KeyCode.X)&& counter>10) {
+					kitchenstage = 5;
+					currentroom="Break Room";
+					counter = 0;
+				}
+				if (Input.GetKeyDown (KeyCode.C)&& counter>10) {
+					picroomstage = 2;	
+					counter = 0;
+				}
+
+			}
+			if (picroomstage == 1&&counter>10) {
+				if (Input.anyKeyDown && counter>10) {
+					talkint++;
+					counter=0;
+				}
+				if (talkint == 0) {
+					currentroom = "Picture Room";
+					thetext.text = "Smalltalk with Anna";
+					talkbox.text = "Any Idea why he's keeping us late? I'm done for the day.";
+				}
+				if (talkint == 1) {
+					thetext.text = "I hear you're helping him with something?";
+					talkbox.text = "Any Idea why he's keeping us late? I'm done for the day.";
+				}
+				if (talkint == 2) {
+					thetext.text = "Smalltalk with Anna";
+					talkbox.text = "Any Idea why he's keeping us late? I'm done for the day.";
+				}
+				if (talkint == 3) {
+					thetext.text = "Smalltalk with Anna";
+					talkbox.text = "Any Idea why he's keeping us late? I'm done for the day.";
+				}
+			}
+
+
+
+
 		}
 		if (currentroom == "?????" || currentroom == "Cat Room") {
 		}
